@@ -47,7 +47,7 @@ function Choice({ tool, onClick }) {
 
   return (
     <button type="button" className="choice" onClick={handleClick}>
-      {<img className="choice__image" src={imageSrc} alt={tool} />}
+      {imageSrc && <img className="choice__image" src={imageSrc} alt={tool} />}
     </button>
   )
 }
