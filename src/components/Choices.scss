@@ -1,0 +1,7 @@
+.choices {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  gap: clamp(1rem, 4vw, 3rem);
+  width: 100%;
+}
