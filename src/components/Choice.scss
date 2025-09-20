@@ -8,6 +8,7 @@
   border: none;
   border-radius: 0.75rem;
   cursor: pointer;
+  transition: transform 160ms ease-out, opacity 160ms ease-out;
 }
 
 .choice__image {
@@ -22,4 +23,18 @@
 .choice:hover .choice__image,
 .choice:focus-visible .choice__image {
   transform: scale(1.15);
+}
+
+.choice--disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+.choice--disabled .choice__image {
+  transform: none;
+}
+
+.choice--disabled:focus-visible .choice__image,
+.choice--disabled:hover .choice__image {
+  transform: none;
 }

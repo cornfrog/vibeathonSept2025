@@ -34,9 +34,9 @@ const imageMap = {
   'Duct tape': ductTapeImg,
 }
 
-function Choice({ tool, onClick }) {
+function Choice({ tool, isDisabled = false, onClick }) {
   const handleClick = (event) => {
-    if (typeof onClick !== 'function') {
+    if (isDisabled || typeof onClick !== 'function') {
       return
     }
 
@@ -46,7 +46,12 @@ function Choice({ tool, onClick }) {
   const imageSrc = imageMap[tool]
 
   return (
-    <button type="button" className="choice" onClick={handleClick}>
+    <button
+      type="button"
+      className={`choice${isDisabled ? ' choice--disabled' : ''}`}
+      onClick={handleClick}
+      disabled={isDisabled}
+    >
       {imageSrc && <img className="choice__image" src={imageSrc} alt={tool} />}
     </button>
   )

@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 
 import Choice from './Choice.jsx'
 import toolsList from '../tools.jsx'
@@ -25,6 +25,7 @@ const pickRandomUniqueTools = (tools, count) => {
 function Choices({ onMount, onCorrectChoice, onIncorrectChoice }) {
   const selectedTools = useMemo(() => pickRandomUniqueTools(toolsList, CHOICE_COUNT), [])
   const [correctTool] = selectedTools
+  const [disabledTools, setDisabledTools] = useState(new Set())
 
   useEffect(() => {
     if (typeof onMount === 'function' && correctTool) {
@@ -32,19 +33,36 @@ function Choices({ onMount, onCorrectChoice, onIncorrectChoice }) {
     }
   }, [onMount, correctTool])
 
+  const disableTool = (toolName) => {
+    setDisabledTools((previous) => {
+      if (previous.has(toolName)) {
+        return previous
+      }
+
+      const next = new Set(previous)
+      next.add(toolName)
+      return next
+    })
+  }
+
   return (
     <div className="choices">
       {selectedTools.map((tool) => (
         <Choice
           key={tool}
           tool={tool}
+          isDisabled={disabledTools.has(tool)}
           onClick={(event, chosenTool) => {
             if (chosenTool === correctTool) {
               if (typeof onCorrectChoice === 'function') {
                 onCorrectChoice(chosenTool, event)
               }
-            } else if (typeof onIncorrectChoice === 'function') {
-              onIncorrectChoice(chosenTool, event)
+            } else {
+              disableTool(chosenTool)
+
+              if (typeof onIncorrectChoice === 'function') {
+                onIncorrectChoice(chosenTool, event)
+              }
             }
           }}
         />
