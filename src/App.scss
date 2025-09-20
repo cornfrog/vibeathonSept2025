@@ -1,0 +1,25 @@
+body{
+background-color: #8b5a2b;
+}
+
+.riddle-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    gap: 1rem;
+    border: 2px solid #261b13;
+    box-shadow: 0 0 30px white;
+    width:fit-content;
+    padding:2rem;
+    margin:1rem auto;
+    border-radius: .5rem;
+    .riddle-text{
+        font-size: 3rem;
+    }
+}
+
+.center-text{
+    text-align: center;
+}
+
